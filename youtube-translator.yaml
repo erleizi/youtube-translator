@@ -1,13 +1,12 @@
 name: "🌐 YouTube 字幕翻译"
-description: "独立字幕翻译，只干翻译一件事：把 YouTube 字幕翻译成目标语言（默认简中双语）。目标语言和双语开关在下方设置里改，改完即时生效。"
+description: "独立字幕翻译，只干翻译一件事：拦截 YouTube 字幕请求，让 YouTube 服务器直接返回翻译好的字幕（官方自动翻译机制）。目标语言在下方设置里改。"
 author: "白日梦"
 
-# 模块设置页里渲染出的两个控件：
-# 「目标语言」下拉 + 「双语显示」开关，脚本里用 ctx.env.TARGET_LANG / ctx.env.BILINGUAL 读取
+# 模块设置页里渲染出的控件：脚本里用 ctx.env.TARGET_LANG 读取
 env_schema:
   TARGET_LANG:
     name: 目标语言
-    description: "字幕翻译的目标语言，默认简体中文。"
+    description: "字幕翻译的目标语言，默认简体中文。改完下次播放即时生效。"
     default_value: "zh-CN"
     options:
       - "zh-CN"
@@ -20,13 +19,6 @@ env_schema:
       - "es"
       - "ru"
       - "th"
-  BILINGUAL:
-    name: 双语显示
-    description: "开 = 原文字幕 + 中文翻译上下双语；关 = 只显示翻译。"
-    default_value: "true"
-    options:
-      - "true"
-      - "false"
 
 mitm:
   hostnames:
@@ -35,9 +27,8 @@ mitm:
       - "m.youtube.com"
 
 scriptings:
-  - http_response:
+  - http_request:
       name: "🌐 字幕翻译"
       match: '^https://(www|m)\.youtube\.com/api/timedtext'
-      script_url: "https://raw.githubusercontent.com/erleizi/youtube-translator/main/youtube-translate-v2.js"
-      timeout: 30
-      body_required: true
+      script_url: "https://raw.githubusercontent.com/erleizi/youtube-translator/main/youtube-translate-v3.js"
+      timeout: 10
