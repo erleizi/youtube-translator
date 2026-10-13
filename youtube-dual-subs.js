@@ -1,12 +1,31 @@
 /**
- * YouTube Dual Subs - Loon
+ * YouTube Dual Subs - 独立版
+ * 基于 LamJIson 的开源实现，适配 Egern/Surge/Loon
  * argument: subtitle_type=Translate&show_only_auto_translation=false
  */
+// 兼容层：同时支持经典 $argument、Egern 转换后的 ctx.env["_compat.$argument"]
+function getArgument() {
+  try {
+    if (typeof $argument !== "undefined" && $argument) return String($argument);
+  } catch (_) {}
+  try {
+    if (typeof ctx !== "undefined" && ctx && ctx.env && ctx.env["_compat.$argument"]) {
+      return String(ctx.env["_compat.$argument"]);
+    }
+  } catch (_) {}
+  return "";
+}
 const $ = {
   request: typeof $request !== "undefined" ? $request : {},
   response: typeof $response !== "undefined" ? $response : {},
-  argument: typeof $argument !== "undefined" ? $argument : "",
-  done: (o) => $done(o)
+  argument: getArgument(),
+  done: (o) => {
+    try {
+      if (typeof $done !== "undefined") return $done(o);
+    } catch (_) {}
+    // Egern 新式 API 兜底：如果 $done 不可用，尝试 return 风格（由外层 export 包装处理）
+    return o;
+  }
 };
 
 if (!$response || !$response.body) {
