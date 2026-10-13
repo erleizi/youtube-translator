@@ -1,0 +1,18 @@
+name: YouTube 独立中文翻译补丁
+description: 专门负责开启简中字幕与评论翻译，配合远程去广告使用
+dns: {}
+rules: []
+scriptings:
+  - http_response:
+      name: youtube.translate.override
+      match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch)
+      script_url: https://cdn.jsdelivr.net/gh/erleizi/youtube-translator@main/youtube.response.js
+      env:
+        _compat.$argument: '{"lyricLang":"zh-Hans","captionLang":"zh-Hans","blockUpload":false,"blockImmersive":false,"blockShorts":false,"debug":false}'
+      timeout: 60
+      body_required: true
+      binary_body: true
+mitm:
+  hostnames:
+    includes:
+      - youtubei.googleapis.com
