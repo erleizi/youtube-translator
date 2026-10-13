@@ -39,3 +39,5 @@ scriptings:
       name: "🌐 字幕翻译"
       match: '^https://(www|m)\.youtube\.com/api/timedtext'
       script_url: "https://raw.githubusercontent.com/erleizi/youtube-translator/main/youtube-translate-v2.js"
+      timeout: 30
+      body_required: true
