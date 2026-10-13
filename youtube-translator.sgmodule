@@ -1,0 +1,10 @@
+#!name=🌐 YouTube 字幕翻译
+#!desc=独立字幕翻译，只干翻译一件事：拦截 YouTube 字幕请求，调用 Google 翻译转成目标语言（默认简中双语）。目标语言 / 双语开关在 BoxJs 里改。
+#!author=白日梦
+#!homepage=https://github.com/erleizi/youtube-translator
+
+[MITM]
+hostname = %APPEND% www.youtube.com, m.youtube.com
+
+[Script]
+http-response ^https://(www|m)\.youtube\.com/api/timedtext script-path=https://raw.githubusercontent.com/erleizi/youtube-translator/main/youtube-translate.js, requires-body=true, timeout=30, tag=YT-Translator
