@@ -1,0 +1,16 @@
+name: YouTube 独立双语字幕
+description: 独立双语字幕翻译模块，专职处理字幕，不含去广告
+
+mitm:
+  hostnames:
+    - www.youtube.com
+    - m.youtube.com
+
+scriptings:
+  - http_response:
+      name: YouTube-DualSub
+      match: ^https?:\/\/www\.youtube\.com\/api\/timedtext\?
+      script_url: https://raw.githubusercontent.com/erleizi/youtube-translator/main/youtube-dual-subs.js
+      timeout: 60
+      body_required: true
+      update_interval: 86400
