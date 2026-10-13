@@ -4,9 +4,11 @@
 
 ## 文件
 
-- `youtube-translator.sgmodule` — 通用模块文件（Egern / Surge / Loon，粘一个 URL 即装好，不用手动加配置行）
-- `youtube-translate.js` — 翻译脚本本体
-- `youtube-translator.boxjs.json` — BoxJs 订阅（改目标语言 / 双语开关）
+- `youtube-translator.yaml` — Egern 原生模块（推荐，粘一个 URL 即装好，设置页自带「目标语言」下拉和「双语显示」开关）
+- `youtube-translate-v2.js` — v2 翻译脚本（Egern 原生 API：`export default main(ctx)`）
+- `youtube-translator.sgmodule` — 旧版经典格式模块（已被 yaml 版取代，留着备用）
+- `youtube-translate.js` — 旧版经典脚本（已被 v2 取代，留着备用）
+- `youtube-translator.boxjs.json` — BoxJs 订阅（兼容保留）
 - `README.md` — 本说明
 
 ## 安装（Egern）
@@ -14,21 +16,12 @@
 Egern → 模块 → 添加 → 从 URL 导入，填：
 
 ```
-https://raw.githubusercontent.com/erleizi/youtube-translator/main/youtube-translator.sgmodule
+https://raw.githubusercontent.com/erleizi/youtube-translator/main/youtube-translator.yaml
 ```
 
-## 改设置（BoxJs）
+装好后在模块设置页里直接改「目标语言」和「双语显示」，改完即时生效。
 
-BoxJs → 应用订阅 → 添加，填：
-
-```
-https://raw.githubusercontent.com/erleizi/youtube-translator/main/youtube-translator.boxjs.json
-```
-
-- `yt_translator_target`：目标语言，默认 `zh-CN`（可填 zh-TW / en / ja / ko 等）
-- `yt_translator_bilingual`：双语显示，默认开（关 = 只显示译文）
-
-改完下次请求自动生效，不用重启 App。
+> 如果之前装过旧版（youtube-translator.sgmodule），先删掉旧模块再装 yaml 版。
 
 ## 行为说明
 
