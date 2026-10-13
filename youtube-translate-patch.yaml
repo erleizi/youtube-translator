@@ -6,7 +6,7 @@ scriptings:
   - http_response:
       name: youtube.translate.override
       match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch)
-      script_url: https://cdn.jsdelivr.net/gh/erleizi/youtube-translator@main/youtube.response.js
+      script_url: https://raw.githubusercontent.com/Aioneas/Surge/main/Script/youtube.response.js
       env:
         _compat.$argument: '{"lyricLang":"zh-Hans","captionLang":"zh-Hans","blockUpload":false,"blockImmersive":false,"blockShorts":false,"debug":false}'
       timeout: 60
