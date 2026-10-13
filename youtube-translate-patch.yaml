@@ -1,10 +1,10 @@
-name: YouTube 独立中文翻译补丁
-description: 专门负责开启简中字幕与评论翻译，配合远程去广告使用
+name: YouTube 独立中文字幕与翻译补丁
+description: 纯本地保存，专门负责强制开启简体中文双语字幕、歌词与评论翻译，与远程去广告模块完美解耦互不干扰
 dns: {}
 rules: []
 scriptings:
   - http_response:
-      name: youtube.translate.override
+      name: YouTube.Independent.Translate
       match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch)
       script_url: https://raw.githubusercontent.com/Aioneas/Surge/main/Script/youtube.response.js
       env:
